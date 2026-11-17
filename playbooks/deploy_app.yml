@@ -1,0 +1,20 @@
+# Deploy a project by running its own deploy.sh on the target host.
+# All deploy logic (stop, backup, clone, build, start, health check, ROLLBACK) lives in deploy.sh;
+# Ansible only runs it. The bot normally runs this for you:
+#   ansible-playbook -i inventory/hosts.ini playbooks/deploy_app.yml \
+#     -e project=myapp -e target=app-server-1 -e branch=main
+# deploy.sh exit codes: 0 ok | 1 failed + rolled back | 2 failed + rollback failed
+# The task name starts with "STEP deploy"; run_deploy.py picks up its output lines.
+
+- name: Deploy {{ project }}
+  hosts: "{{ target }}"
+  gather_facts: false
+  vars_files:
+    - ../projects.yml
+  vars:
+    p: "{{ projects[project] }}"
+  tasks:
+    - name: "STEP deploy | Running deploy.sh"
+      command: "bash {{ p.deploy_script | default('deploy.sh') }} {{ branch | default('', true) }}"
+      args:
+        chdir: "{{ p.base_dir }}"

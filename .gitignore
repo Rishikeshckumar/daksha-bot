@@ -1,0 +1,19 @@
+# Live configuration and secrets: never commit
+local-config/
+hosts.ini
+projects.yml
+users.yml
+project.env
+*.env
+.env*
+id_ed25519*
+*.pem
+*.key
+
+# runtime
+logs/
+*.log
+.deploy.lock
+venv/
+__pycache__/
+artifacts/

@@ -1,0 +1,4 @@
+ansible
+ansible-runner
+slack_bolt
+pyyaml
