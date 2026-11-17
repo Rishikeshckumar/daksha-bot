@@ -17,12 +17,12 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 from run_deploy import run_deploy
 
-BASE = os.environ.get("DEPLOYBOT_DIR", "/opt/deploybot")
+BASE = os.environ.get("DEPLOYBOT_DIR", "/opt/dakshabot")
 PROJECTS_FILE = f"{BASE}/project/projects.yml"
 USERS_FILE = f"{BASE}/users.yml"
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger("deploybot")
+log = logging.getLogger("dakshabot")
 
 app = App(token=os.environ["SLACK_BOT_TOKEN"])
 _locks: dict[str, threading.Lock] = {}

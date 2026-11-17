@@ -1,0 +1,12 @@
+# Ansible inventory -> /opt/dakshabot/inventory/hosts.ini
+# One line per app server. The name on the left is what `host:` in projects.yml refers to.
+[app_servers]
+app-server-1 ansible_host=192.0.2.10 ansible_user=deploy
+# app-server-2 ansible_host=192.0.2.11 ansible_user=deploy
+
+[all:vars]
+# private key of the bot user (never commit it); its .pub goes into the deploy user's authorized_keys
+ansible_ssh_private_key_file=/opt/dakshabot/home/.ssh/id_ed25519
+# ServerAliveInterval keeps long deploys from being dropped by idle-connection timeouts
+ansible_ssh_common_args='-o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30'
+ansible_python_interpreter=/usr/bin/python3

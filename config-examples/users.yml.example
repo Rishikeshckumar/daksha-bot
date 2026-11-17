@@ -1,0 +1,9 @@
+# Who may deploy -> /opt/dakshabot/users.yml
+# Maps the group names used in projects.yml `allowed:` to Slack member IDs.
+# Find an ID: Slack -> profile -> ⋮ -> "Copy member ID" (looks like U01ABCDEF2G).
+groups:
+  admins:
+    - U0000000000
+  developers:
+    - U1111111111
+    - U2222222222

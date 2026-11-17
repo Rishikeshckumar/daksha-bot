@@ -2,15 +2,15 @@
 # Set up the bot server (Ubuntu). Run from the repo folder:   sudo bash setup_server.sh
 # Everything lives under $DEPLOYBOT_DIR (venv, config, secrets, SSH key, the bot user's home).
 # Override the defaults if you want a different layout:
-#   sudo env DEPLOYBOT_DIR=/data/infra/deploybot BOT_USER=deploybot GROUP=ops bash setup_server.sh
+#   sudo env DEPLOYBOT_DIR=/data/infra/dakshabot BOT_USER=dakshabot GROUP=ops bash setup_server.sh
 # Outside $DEPLOYBOT_DIR it only touches: apt packages, the bot user/group entries, and one
 # symlink in /etc/systemd/system that points at $DEPLOYBOT_DIR/$SERVICE.service.
 set -euo pipefail
 
-B=${DEPLOYBOT_DIR:-/opt/deploybot}
-BOT_USER=${BOT_USER:-deploybot}
-GROUP=${GROUP:-deploybot}          # members of this group can edit the config under $B
-SERVICE=${SERVICE:-deploybot}
+B=${DEPLOYBOT_DIR:-/opt/dakshabot}
+BOT_USER=${BOT_USER:-dakshabot}
+GROUP=${GROUP:-dakshabot}          # members of this group can edit the config under $B
+SERVICE=${SERVICE:-dakshabot}
 H=$B/home                          # bot user's home (SSH key, ansible tmp, pip cache)
 SRC=$(cd "$(dirname "$0")" && pwd)
 
@@ -51,7 +51,7 @@ chown "$BOT_USER:$GROUP" "$B/$SERVICE.env"; chmod 600 "$B/$SERVICE.env"
 # systemd unit kept inside $B and only linked into systemd
 cat > "$B/$SERVICE.service" <<EOF
 [Unit]
-Description=Deploy Bot (Slack Socket Mode + Ansible)
+Description=Daksha Bot (Slack Socket Mode + Ansible)
 After=network-online.target
 Wants=network-online.target
 

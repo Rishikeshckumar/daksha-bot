@@ -1,0 +1,18 @@
+# Project registry -> /opt/dakshabot/project/projects.yml
+# Re-read on every /deploy command, so no restart is needed after editing.
+# Adding a project = adding a block. No code change.
+projects:
+  myapp:
+    host: app-server-1               # must match a name in hosts.ini
+    type: app                        # free label, shown in /deploy list
+    base_dir: /opt/apps/myapp        # folder on the app server that holds deploy.sh
+    default_branch: main             # shown in /deploy list; the script decides the real default
+    allowed: [admins, developers]    # groups from users.yml allowed to deploy this project
+    # deploy_script: deploy.sh       # optional: a different script name inside base_dir
+
+  # another-app:
+  #   host: app-server-2
+  #   type: app
+  #   base_dir: /opt/apps/another-app
+  #   default_branch: main
+  #   allowed: [admins]

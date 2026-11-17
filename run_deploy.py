@@ -11,7 +11,7 @@ import os
 
 import ansible_runner
 
-BASE = os.environ.get("DEPLOYBOT_DIR", "/opt/deploybot")
+BASE = os.environ.get("DEPLOYBOT_DIR", "/opt/dakshabot")
 
 
 def run_deploy(project: str, target: str, branch: str, post):
